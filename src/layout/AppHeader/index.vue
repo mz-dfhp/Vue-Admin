@@ -3,6 +3,7 @@ import { useFullscreen } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
+import { useRefresh } from '@/hooks/useRefresh'
 
 const props = withDefaults(defineProps<{ collapsed: boolean }>(), {
   collapsed: false,
@@ -12,6 +13,7 @@ const emit = defineEmits<{
   (e: 'update:collapsed', value: boolean): void
 }>()
 
+const { refresh } = useRefresh()
 const settingStore = useSettingStore()
 const { isDark } = storeToRefs(settingStore)
 const { toggleDark } = settingStore
@@ -28,10 +30,6 @@ function goGithub() {
 function loginOut() {
   window.localStorage.clear()
   window.location.reload()
-}
-
-function refresh() {
-  console.log('refresh')
 }
 </script>
 

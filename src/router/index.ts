@@ -1,16 +1,15 @@
+import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import type { App } from 'vue'
 import { createRouterPermissions } from './permissions'
+import { basicsRoutes } from './basicsRoutes'
 
-const routes = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: () => import('@/layout/index.vue'),
   },
-  {
-    path: '/login',
-    component: () => import('@/views/login/index.vue'),
-  },
+  ...basicsRoutes,
 ]
 
 const router = createRouter({
