@@ -1,9 +1,30 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import AppSubMenu from '../AppSubMenu/index.vue'
 import Logo from '@/assets/vue.svg'
+import { useRouterStore } from '@/store/router'
 
 const props = withDefaults(defineProps<{ collapsed: boolean }>(), {
   collapsed: false,
 })
+
+const routerStore = useRouterStore()
+const { menuList } = storeToRefs(routerStore)
+
+const route = useRoute()
+const activeMenu = ref('')
+
+watch(
+  () => route.name,
+  () => {
+    activeMenu.value = route.path
+  },
+  {
+    immediate: true,
+  },
+)
 </script>
 
 <template>
@@ -16,6 +37,13 @@ const props = withDefaults(defineProps<{ collapsed: boolean }>(), {
       >
       <span v-if="!props.collapsed" class="overflow-hidden text-center">Vue-Admin</span>
     </div>
+    <el-menu
+      :default-active="activeMenu"
+      :collapse="props.collapsed"
+      unique-opened
+    >
+      <AppSubMenu :menu-list="menuList" />
+    </el-menu>
   </div>
 </template>
 

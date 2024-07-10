@@ -10,7 +10,7 @@ Object.keys(modules).forEach((fileName) => {
     path,
     component: modules[fileName],
     meta: {
-      icon: 'icon-[bi:grid]',
+      icon: 'icon-[bi--grid-fill]',
     },
   })
 })

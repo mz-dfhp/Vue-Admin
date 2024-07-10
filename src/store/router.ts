@@ -8,8 +8,10 @@ export const useRouterStore = defineStore(
   pid,
   () => {
     const routerList = ref([])
+    const menuList = ref([])
     return {
       routerList,
+      menuList,
     }
   },
   {
