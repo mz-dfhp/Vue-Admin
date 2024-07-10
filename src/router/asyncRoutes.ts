@@ -14,6 +14,7 @@ Object.keys(modules).forEach((fileName) => {
     },
   })
 })
+
 console.log(asyncRoutes)
 
 export { asyncRoutes }
