@@ -10,7 +10,7 @@ const collapsed = ref(false)
 
 <template>
   <el-container class="w-full h-full">
-    <el-aside width="200px">
+    <el-aside width="0px">
       <AppMenu :collapsed="collapsed" />
     </el-aside>
     <el-container>

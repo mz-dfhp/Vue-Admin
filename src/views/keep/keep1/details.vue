@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>index</div>
+  <div class="">
+    1212121
+  </div>
 </template>
 
 <style scoped lang="scss"></style>
