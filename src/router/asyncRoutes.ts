@@ -1,20 +1,13 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-const modules = import.meta.glob(['../views/**/*.vue', '!../views/basics/*.vue'])
-console.log(modules)
-const asyncRoutes: Array<RouteRecordRaw> = []
+const modules = import.meta.glob('./modules/*.router.ts', {
+  import: 'default',
+  eager: true,
+})
+let modulesRoutes: Array<RouteRecordRaw> = []
 
-Object.keys(modules).forEach((fileName) => {
-  const path = fileName.replace('../views', '').replace('/index.vue', '').replace('.vue', '')
-  asyncRoutes.push({
-    path,
-    component: modules[fileName],
-    meta: {
-      icon: 'icon-[bi--grid-fill]',
-    },
-  })
+Object.keys(modules).forEach((item) => {
+  modulesRoutes = modulesRoutes.concat(modules[item] as RouteRecordRaw)
 })
 
-console.log(asyncRoutes)
-
-export { asyncRoutes }
+export const asyncRoutes: Array<RouteRecordRaw> = modulesRoutes

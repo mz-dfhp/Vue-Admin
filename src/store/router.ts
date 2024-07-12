@@ -1,42 +1,21 @@
 import { ref } from 'vue'
-
 import { defineStore } from 'pinia'
+import type { RouteRecordRaw } from 'vue-router'
 import store from '@/store'
 
 const pid = 'STORE__ROUTER'
 export const useRouterStore = defineStore(
   pid,
   () => {
-    const routerList = ref([])
-    const menuList = ref([
-      {
-        title: '首页',
-        path: '/index',
-      },
-      {
-        title: '缓存',
-        path: '/keep',
-        children: [
-          {
-            title: '缓存页面',
-            path: '/keep/details',
-          },
-        ],
-      },
-      ...Array.from({ length: 20 }, (_, i) => ({
-        title: `demo${i}`,
-        path: `/demo${i}`,
-      })),
-    ])
+    const routerList = ref<any[]>([])
+
+    function setRouterList(result: RouteRecordRaw[]) {
+      routerList.value = result
+    }
     return {
       routerList,
-      menuList,
+      setRouterList,
     }
-  },
-  {
-    persist: {
-      storage: localStorage,
-    },
   },
 )
 

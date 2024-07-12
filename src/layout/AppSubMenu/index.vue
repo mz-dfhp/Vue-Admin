@@ -2,8 +2,9 @@
 import { useRouter } from 'vue-router'
 // eslint-disable-next-line import/no-self-import
 import AppSubMenu from './index.vue'
+import type { IPermission } from '@/interface'
 
-const props = withDefaults(defineProps<{ menuList: any[] }>(), {
+const props = withDefaults(defineProps<{ menuList: IPermission[] }>(), {
   menuList: () => [],
 })
 

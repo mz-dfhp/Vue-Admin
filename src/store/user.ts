@@ -2,11 +2,8 @@ import { ref } from 'vue'
 
 import { defineStore } from 'pinia'
 import store from '@/store'
+import type { IUserInfo } from '@/interface'
 
-interface IUserInfo {
-  username: string
-  avatar: string
-}
 const pid = 'STORE__USER'
 export const useUserStore = defineStore(
   pid,
@@ -15,6 +12,7 @@ export const useUserStore = defineStore(
     const userInfo = ref<IUserInfo>({
       username: 'admin',
       avatar: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      permission: [],
     })
     function setToken(data: string) {
       token.value = data
@@ -32,7 +30,7 @@ export const useUserStore = defineStore(
   {
     persist: {
       storage: localStorage,
-      paths: ['userState.token'],
+      paths: ['token'],
     },
   },
 )

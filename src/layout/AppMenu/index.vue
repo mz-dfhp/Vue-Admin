@@ -4,13 +4,12 @@ import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import AppSubMenu from '../AppSubMenu/index.vue'
 import Logo from '@/assets/vue.svg'
-import { useRouterStore } from '@/store/router'
+import { useMenuStore } from '@/store/menu'
 import { useSettingStore } from '@/store/setting'
 
 const { collapsed } = storeToRefs(useSettingStore())
 
-const routerStore = useRouterStore()
-const { menuList } = storeToRefs(routerStore)
+const { menuList } = storeToRefs(useMenuStore())
 
 const route = useRoute()
 const activeMenu = ref('')
@@ -29,7 +28,7 @@ watch(
 <template>
   <div class="h-full">
     <div class="h-full flex flex-col">
-      <div class="h-[64px] w-full flex items-center justify-center">
+      <div v-if="false" class="h-[64px] w-full flex items-center justify-center">
         <img
           :src="Logo"
           class="logo mx-[10px] h-[32px] animate-bounce"
