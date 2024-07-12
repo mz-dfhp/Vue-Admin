@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: import.meta.env.MODE === 'github-io' ? createWebHashHistory() : createWebHistory(),
+  history: import.meta.env.MODE === 'github' ? createWebHashHistory() : createWebHistory(),
   routes,
 })
 

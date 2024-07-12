@@ -9,7 +9,7 @@
     "build:test": "vue-tsc && vite build --mode test",
     "build:dev": "vue-tsc && vite build --mode dev",
     "build:prod": "vue-tsc && vite build --mode prod",
-    "build:github": "vue-tsc && vite build --base=/Vue-Admin/ --mode=github-io",
+    "build:github": "vue-tsc && vite build --mode github --base=/Vue-Admin/",
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
