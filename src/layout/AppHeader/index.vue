@@ -5,18 +5,10 @@ import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
 import { useRefresh } from '@/hooks/useRefresh'
 
-const props = withDefaults(defineProps<{ collapsed: boolean }>(), {
-  collapsed: false,
-})
-
-const emit = defineEmits<{
-  (e: 'update:collapsed', value: boolean): void
-}>()
-
 const { refresh } = useRefresh()
 const settingStore = useSettingStore()
-const { isDark } = storeToRefs(settingStore)
-const { toggleDark } = settingStore
+const { isDark, collapsed } = storeToRefs(settingStore)
+const { toggleDark, setCollapsed } = settingStore
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
@@ -37,8 +29,8 @@ function loginOut() {
   <div class="h-[60px] flex items-center justify-between px-[20px]">
     <div
       class="cursor-pointer  text-[18px]"
-      :class="props.collapsed ? 'icon-[bi--text-indent-left]' : 'icon-[bi--text-indent-right]'"
-      @click="emit('update:collapsed', !props.collapsed)"
+      :class="collapsed ? 'icon-[bi--text-indent-left]' : 'icon-[bi--text-indent-right]'"
+      @click="setCollapsed(!collapsed)"
     />
     <div class="ml-auto flex items-center justify-around px-[25px]">
       <div

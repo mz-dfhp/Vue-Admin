@@ -21,7 +21,7 @@ function menuItemClick(e: any) {
     <template v-if="item.children && item.children.length">
       <el-sub-menu :key="item.path" :index="item.path">
         <template #title>
-          <div class="mx-[5px]" :class="item.icon ? 'icon-[bi--grid-fill]' : ''" />
+          <div class="mx-[5px]" :class="item.icon || 'icon-[bi--grid-fill]'" />
           <span>{{ item.title }}</span>
         </template>
         <AppSubMenu :menu-list="item.children" />
@@ -29,7 +29,7 @@ function menuItemClick(e: any) {
     </template>
     <template v-else>
       <el-menu-item :key="item.path" :index="item.path" @click="menuItemClick">
-        <div class="mx-[5px]" :class="item.icon ? 'icon-[bi--grid-fill]' : ''" />
+        <div class="mx-[5px]" :class="item.icon || 'icon-[bi--grid-fill]'" />
         <span>{{ item.title }}</span>
       </el-menu-item>
     </template>

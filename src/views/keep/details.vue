@@ -1,8 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const inputValue = ref('')
+</script>
 
 <template>
-  <div class="">
-    1212121
+  <div class="h-[75vh]">
+    details
+    <el-input v-model="inputValue" placeholder="" />
   </div>
 </template>
 

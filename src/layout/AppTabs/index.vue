@@ -48,8 +48,8 @@ function operateDisabled(id: typeof operateList[number]['id']) {
 
 function onTabRemove(key: string) {
   const index = tabsList.value.findIndex(item => item.key === key)
-  closeCurrentTabs(key)
   const navigateIndex = index + (tabsList.value.length - 1 === index ? -1 : 1)
+  closeCurrentTabs(key)
   router.push({
     path: tabsList.value[navigateIndex].key,
     replace: true,
@@ -94,7 +94,7 @@ watch(() => route.path, () => {
     if (index === -1) {
       addTabs({
         key: route.path,
-        label: route.meta.title as string,
+        label: route.meta.title as string || Math.random().toFixed(5),
         closable: route.path !== PageEnum.ROOT_INDEX,
       })
     }

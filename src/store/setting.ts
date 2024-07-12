@@ -13,10 +13,13 @@ export const useSettingStore = defineStore(
     function toggleDark() {
       isDark.value = !isDark.value
     }
-    const transitionName = ref<TTransitionName>('fade')
-
+    const transitionName = ref<TTransitionName>('fade-transform')
     function setTransitionName(data: TTransitionName) {
       transitionName.value = data
+    }
+    const collapsed = ref(false)
+    function setCollapsed(data: boolean) {
+      collapsed.value = data
     }
 
     return {
@@ -24,6 +27,8 @@ export const useSettingStore = defineStore(
       toggleDark,
       transitionName,
       setTransitionName,
+      collapsed,
+      setCollapsed,
     }
   },
   {

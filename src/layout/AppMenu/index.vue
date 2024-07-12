@@ -5,10 +5,9 @@ import { storeToRefs } from 'pinia'
 import AppSubMenu from '../AppSubMenu/index.vue'
 import Logo from '@/assets/vue.svg'
 import { useRouterStore } from '@/store/router'
+import { useSettingStore } from '@/store/setting'
 
-const props = withDefaults(defineProps<{ collapsed: boolean }>(), {
-  collapsed: false,
-})
+const { collapsed } = storeToRefs(useSettingStore())
 
 const routerStore = useRouterStore()
 const { menuList } = storeToRefs(routerStore)
@@ -29,22 +28,31 @@ watch(
 
 <template>
   <div class="h-full">
-    <div class="h-[64px] w-full flex items-center justify-center">
-      <img
-        :src="Logo"
-        class="logo mx-[10px] h-[32px] animate-bounce"
-        alt="Vue logo"
-      >
-      <span v-if="!props.collapsed" class="overflow-hidden text-center">Vue-Admin</span>
+    <div class="h-full flex flex-col">
+      <div class="h-[64px] w-full flex items-center justify-center">
+        <img
+          :src="Logo"
+          class="logo mx-[10px] h-[32px] animate-bounce"
+          alt="Vue logo"
+        >
+        <span v-if="!collapsed" class="overflow-hidden text-center">Vue-Admin</span>
+      </div>
+      <el-scrollbar class="flex-1">
+        <el-menu
+          :default-active="activeMenu"
+          :collapse="collapsed"
+          unique-opened
+        >
+          <AppSubMenu :menu-list="menuList" />
+        </el-menu>
+      </el-scrollbar>
     </div>
-    <el-menu
-      :default-active="activeMenu"
-      :collapse="props.collapsed"
-      unique-opened
-    >
-      <AppSubMenu :menu-list="menuList" />
-    </el-menu>
+    <!-- TODO -->
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+:deep(.el-menu) {
+  border-right: none;
+}
+</style>
