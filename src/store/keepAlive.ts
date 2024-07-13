@@ -6,12 +6,13 @@ const pid = 'STORE__KEEPALIVE'
 export const useKeepAliveStore = defineStore(pid, () => {
   const keepList = ref<string[]>([])
 
-  function addKeepAlive(keepItem: string) {
-    keepList.value = Array.from(new Set([...keepList.value, keepItem]))
+  function addKeepAlive(data: string) {
+    keepList.value = Array.from(new Set([...keepList.value, data]))
   }
 
-  function removeKeepAlive(keepItem: string) {
-    keepList.value = keepList.value.filter(item => item !== keepItem)
+  function removeKeepAlive(data: string) {
+    console.log(data)
+    keepList.value = keepList.value.filter(item => item !== data)
   }
 
   return {

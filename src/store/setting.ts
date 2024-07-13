@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 import store from '@/store'
 
 type TTransitionName = 'fade' | 'slide-fade' | 'zoom' | 'fade-transform'
+type TabName = 'card' | 'etherealize'
 
 const pid = 'STORE__SETTING'
 export const useSettingStore = defineStore(
@@ -21,7 +22,14 @@ export const useSettingStore = defineStore(
     function setCollapsed(data: boolean) {
       collapsed.value = data
     }
-
+    const tabName = ref<TabName>('card')
+    function setTabName(data: TabName) {
+      tabName.value = data
+    }
+    const themeColor = ref('')
+    function setThemeColor(data: string) {
+      themeColor.value = data
+    }
     return {
       isDark,
       toggleDark,
@@ -29,6 +37,10 @@ export const useSettingStore = defineStore(
       setTransitionName,
       collapsed,
       setCollapsed,
+      tabName,
+      setTabName,
+      themeColor,
+      setThemeColor,
     }
   },
   {

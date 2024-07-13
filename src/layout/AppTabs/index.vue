@@ -5,11 +5,13 @@ import { useRoute, useRouter } from 'vue-router'
 import { useRefresh } from '@/hooks/useRefresh'
 import { useTabsStore } from '@/store/tabs'
 import { PageEnum } from '@/enums/page'
+import { useSettingStore } from '@/store/setting'
 
 const route = useRoute()
 const router = useRouter()
 
 const { refresh } = useRefresh()
+const { tabName } = storeToRefs(useSettingStore())
 const tabsStore = useTabsStore()
 const { tabsList } = storeToRefs(tabsStore)
 const { addTabs, closeLeftTabs, closeRightTabs, closeCurrentTabs, closeOtherTabs, closeAllTabs } = tabsStore
@@ -111,6 +113,7 @@ watch(() => route.path, () => {
       <el-tabs
         v-model="activeKey"
         type="card"
+        :class="tabName"
         @tab-remove="onTabRemove"
         @tab-click="onTabClick"
       >
@@ -153,10 +156,145 @@ watch(() => route.path, () => {
     margin: 0;
     border-bottom: none;
     .el-tabs__nav-scroll {
-      padding: 0;
+      padding: 0 25px;
       .el-tabs__nav {
         border: none !important;
       }
+    }
+  }
+}
+// 卡片
+:deep(.card) {
+  .el-tabs__nav-scroll {
+    padding: 0 25px;
+  }
+  .el-tabs__item {
+    min-width: 100px;
+    margin-left: -10px;
+    text-align: center;
+    border: none !important;
+
+    &:hover {
+      z-index: 2;
+      position: relative;
+      background: #cacaca;
+      border-radius: 8px 8px 0 0;
+
+      &::before {
+        position: absolute;
+        content: '';
+        bottom: 0;
+        left: -20px;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(
+          circle at 0 0,
+          transparent 20px,
+          #cacaca 21px
+        );
+      }
+
+      &::after {
+        position: absolute;
+        content: '';
+        right: -20px;
+        bottom: 0;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(
+          circle at 100% 0,
+          transparent 20px,
+          #cacaca 21px
+        );
+      }
+    }
+  }
+
+  .el-tabs__item.is-active {
+    z-index: 1;
+    position: relative;
+    background: #f5f5f5;
+    border-radius: 8px 8px 0 0;
+
+    &::before {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: -20px;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(
+        circle at 0 0,
+        transparent 20px,
+        #f5f5f5 21px
+      );
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      right: -20px;
+      bottom: 0;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(
+        circle at 100% 0,
+        transparent 20px,
+        #f5f5f5 21px
+      );
+    }
+  }
+}
+
+// 灵动
+:deep(.etherealize) {
+  .el-tabs__item {
+    position: relative;
+    text-align: center;
+    border: none !important;
+    border-radius: 2px;
+    margin-right: 16px;
+
+    &::before {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--el-color-primary);
+      transition: 0.3s;
+    }
+
+    &:hover {
+      background: var(--el-color-primary-light-9);
+
+      &::before {
+        width: 100%;
+      }
+    }
+
+    + .el-tabs__item {
+      &::after {
+        position: absolute;
+        content: '';
+        top: 50%;
+        left: -8px;
+        width: 1px;
+        height: 60%;
+        background: var(--el-color-primary-light-3) !important;
+        border-radius: 1px;
+        opacity: 1;
+        transform: translateY(-50%) scaleX(0.5);
+      }
+    }
+  }
+  .el-tabs__item.is-active {
+    position: relative;
+    background: var(--el-color-primary-light-9);
+
+    &::before {
+      width: 100%;
     }
   }
 }

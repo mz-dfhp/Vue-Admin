@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-defineExpose({
-  name: 'keep-one-page-info',
+defineOptions({
+  name: location.pathname,
 })
+
 const router = useRouter()
 function goBack() {
   router.back()

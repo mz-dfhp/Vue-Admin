@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 defineOptions({
-  name: 'Index',
+  name: location.pathname,
 })
 
 const inputValue = ref('')

@@ -16,6 +16,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/index/index.vue'),
       meta: {
         title: '工作台',
+        keepAlive: true,
       },
     },
   ],

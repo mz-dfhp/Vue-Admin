@@ -12,7 +12,7 @@ export function getUserInfo(role: string) {
       filterPath = ['/component']
     }
     const userInfo = {
-      username: 'mz',
+      username: 'admin',
       age: 18,
       role,
       avatar: role === 'admin' ? 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png' : 'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',

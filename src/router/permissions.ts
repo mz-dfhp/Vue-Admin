@@ -42,7 +42,7 @@ export function createRouterPermissions(router: Router) {
   router.afterEach((to) => {
     const keepAliveStore = useKeepAliveStore()
     if (to.meta.keepAlive) {
-      keepAliveStore.addKeepAlive(to.name as string)
+      keepAliveStore.addKeepAlive(to.path)
     }
     NProgress.done()
   })

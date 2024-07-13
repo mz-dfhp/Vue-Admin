@@ -2,11 +2,15 @@
 import { ref } from 'vue'
 import { useKeepAliveStore } from '@/store/keepAlive'
 
+defineOptions({
+  name: location.pathname,
+})
+
 const keepAliveStore = useKeepAliveStore()
-const input = ref('')
 function removeKeep() {
-  keepAliveStore.removeKeepAlive('Keep-four-page')
+  keepAliveStore.removeKeepAlive(location.pathname)
 }
+const input = ref('')
 </script>
 
 <template>

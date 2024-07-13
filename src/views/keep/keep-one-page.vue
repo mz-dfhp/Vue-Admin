@@ -3,11 +3,11 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useKeepAliveStore } from '@/store/keepAlive'
 
-defineExpose({
-  name: 'keep-one-info',
+defineOptions({
+  name: location.pathname,
 })
-
 const router = useRouter()
+const keepAliveStore = useKeepAliveStore()
 function goToInfoPage() {
   router.push({
     path: '/keep/keep-one-info',
@@ -16,10 +16,9 @@ function goToInfoPage() {
     },
   })
 }
-const keepAliveStore = useKeepAliveStore()
 const input = ref('')
 function removeKeep() {
-  keepAliveStore.removeKeepAlive('Keep-one')
+  keepAliveStore.removeKeepAlive(location.pathname)
 }
 </script>
 
