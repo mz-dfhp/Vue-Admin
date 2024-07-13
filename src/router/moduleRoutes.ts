@@ -1,7 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 
 const modules = import.meta.glob('../views/**/*.vue')
-console.log(modules)
 const modulesRoutes: Array<RouteRecordRaw> = []
 Object.keys(modules).forEach((fileName) => {
   modulesRoutes.push({
@@ -10,4 +9,4 @@ Object.keys(modules).forEach((fileName) => {
   })
 })
 
-console.log(modulesRoutes)
+export { modulesRoutes }

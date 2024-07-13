@@ -15,18 +15,14 @@ export async function setAsyncRoutes() {
   const userInfo = await getUserInfo(userStore.token)
   // 保存用户信息
   await userStore.setUserInfo(userInfo)
+  // 生成左侧菜单栏
+  await menuStore.setMenusList(userInfo.permission)
   // 过滤路由后扁平化路由 处理二级以上 keep-alive
   const flatRoutes = flatSystemRoutes(cloneDeep(asyncRoutes))
-  console.log(flatRoutes)
-
-  // TODO
-  //
   // 对路由进行对比 过滤无权限的路由
   const result = await diffRoutes(cloneDeep(flatRoutes), userInfo.permission)
   // 生成用来注册路由
-  await routerStore.setRouterList(asyncRoutes || result)
-  // 生成左侧菜单栏
-  await menuStore.setMenusList(userInfo.permission)
+  await routerStore.setRouterList(result)
   // 处理完addRoute
   routerStore.routerList.forEach((item) => {
     router.addRoute(item)

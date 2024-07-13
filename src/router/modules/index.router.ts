@@ -7,7 +7,7 @@ const routes: RouteRecordRaw = {
   meta: {
     title: '首页',
     sort: 1,
-    icon: 'i-bi:grid',
+    icon: 'icon-[bi--grid-fill]',
   },
   redirect: '/index',
   children: [

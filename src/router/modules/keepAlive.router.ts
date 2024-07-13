@@ -8,7 +8,7 @@ const routes: RouteRecordRaw = {
   meta: {
     title: '缓存',
     sort: 2,
-    icon: 'i-bi:grid',
+    icon: 'icon-[bi--grid-fill]',
   },
   children: [
     {

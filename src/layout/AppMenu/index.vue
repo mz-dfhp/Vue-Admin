@@ -17,7 +17,7 @@ const activeMenu = ref('')
 watch(
   () => route.name,
   () => {
-    activeMenu.value = route.path
+    activeMenu.value = route.meta.activeMenu || route.path
   },
   {
     immediate: true,

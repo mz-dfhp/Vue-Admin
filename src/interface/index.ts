@@ -5,6 +5,7 @@ export interface IPermission {
   title?: string
   sort?: number
   icon?: string
+  hide?: boolean
   children?: Array<IPermission>
 }
 
@@ -14,5 +15,6 @@ export interface IUserInfo {
   role?: string
   permission: Array<IPermission>
 }
-
-export interface TBreadcrumb extends Omit<RouteMeta, 'title' | 'hide'>, Omit<RouteRecordRaw, 'path'> {}
+export interface TBreadcrumb extends
+  Omit<RouteMeta, 'title' | 'hide'>,
+  Omit<RouteRecordRaw, 'path'> {}

@@ -1,64 +1,23 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { cloneDeep } from 'lodash-es'
-import type { IPermission, TBreadcrumb } from '@/interface'
+import type { IPermission } from '@/interface'
 
 /**
  * @description 扁平化路由 生成面包屑
  * @param systemRoutes
  * @returns 扁平化路由
  */
-export function flatSystemRoutes(systemRoutes: RouteRecordRaw[]) {
-  function flatRoutes(routes: RouteRecordRaw[], routeCrumbs: TBreadcrumb[] = [], url: string) {
-    const result: RouteRecordRaw[] = []
-    routes.forEach((element) => {
-      if (element.meta) {
-        element.meta.breadcrumb = [
-          ...routeCrumbs,
-          {
-            path: element.path,
-            ...element?.meta,
-            title: element?.meta?.title,
-            hide: element?.meta?.hide,
-          },
-        ]
-      }
-      element.path = `${url ? `${url}/` : ''}${element.path}`
-      if (element.children && element.children.length > 0) {
-        const cope = cloneDeep(element.children)
-        delete element.children
-        result.push(...flatRoutes(cope, element?.meta?.breadcrumb, element.path))
-      }
-      else {
-        result.push(element)
-      }
+export function flatSystemRoutes(systemRoutes: RouteRecordRaw[], url = '') {
+  const result: RouteRecordRaw[] = []
+  systemRoutes.forEach((item) => {
+    const path = `${url || ''}/${item.path}`.replace('//', '/')
+    result.push({
+      ...item,
+      path,
+      meta: item.meta,
+      children: item.children ? flatSystemRoutes(item.children, path) : [],
     })
-    return result
-  }
-  const resultRoutes = [...systemRoutes]
-  resultRoutes.forEach((route: RouteRecordRaw) => {
-    if (route.children) {
-      route.children.forEach((sonRoute) => {
-        const routeCrumbs = [
-          {
-            path: route.path,
-            ...route.meta,
-          },
-          {
-            path: sonRoute.path,
-            title: sonRoute?.meta?.title,
-            hide: sonRoute?.meta?.hide,
-          },
-        ]
-        if (sonRoute.meta) {
-          sonRoute.meta.breadcrumb = routeCrumbs
-        }
-        if (sonRoute.children) {
-          sonRoute.children = flatRoutes(sonRoute.children, routeCrumbs, '')
-        }
-      })
-    }
   })
-  return resultRoutes
+  return result
 }
 
 /**
@@ -70,9 +29,6 @@ export function flatSystemRoutes(systemRoutes: RouteRecordRaw[]) {
 export function diffRoutes(allRoutes: RouteRecordRaw[], userRoutes: IPermission[]): RouteRecordRaw[] {
   const resultRoutes: RouteRecordRaw[] = []
   allRoutes.forEach((item) => {
-    if (item?.meta?.hide) {
-      resultRoutes.push(item)
-    }
     userRoutes.forEach((Item) => {
       if (item.path === Item.path) {
         if (item.children?.length && Item.children?.length) {
@@ -92,16 +48,15 @@ export function diffRoutes(allRoutes: RouteRecordRaw[], userRoutes: IPermission[
 export function formatteClientRoutes(list: RouteRecordRaw[], url = '') {
   const result: IPermission[] = []
   list.forEach((item) => {
-    if (!item.meta?.hide) {
-      const path = !url ? item.path : `${url === '/' ? '' : `${url}/`}${item.path}`
-      result.push({
-        path,
-        title: item.meta?.title,
-        sort: item.meta?.sort,
-        icon: item.meta?.icon,
-        children: item.children ? formatteClientRoutes(item.children, path) : undefined,
-      })
-    }
+    const path = `${url || ''}/${item.path}`.replace('//', '/')
+    result.push({
+      path,
+      title: item.meta?.title,
+      sort: item.meta?.sort,
+      icon: item.meta?.icon,
+      hide: item.meta?.hide,
+      children: item.children ? formatteClientRoutes(item.children, path) : [],
+    })
   })
   return result
 }
