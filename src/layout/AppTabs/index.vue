@@ -49,11 +49,11 @@ function operateDisabled(id: typeof operateList[number]['id']) {
 function onTabRemove(key: string) {
   const index = tabsList.value.findIndex(item => item.key === key)
   const navigateIndex = index + (tabsList.value.length - 1 === index ? -1 : 1)
-  closeCurrentTabs(key)
   router.push({
     path: tabsList.value[navigateIndex].key,
     replace: true,
   })
+  closeCurrentTabs(key)
 }
 
 function onTabClick(e: { paneName: string }) {
