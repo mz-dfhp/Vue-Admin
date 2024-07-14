@@ -11,7 +11,6 @@ export const useKeepAliveStore = defineStore(pid, () => {
   }
 
   function removeKeepAlive(data: string) {
-    console.log(data)
     keepList.value = keepList.value.filter(item => item !== data)
   }
 

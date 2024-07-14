@@ -92,11 +92,11 @@ function handleCommand(id: typeof operateList[number]['id']) {
 
 watch(() => route.path, () => {
   if (route.path !== activeKey.value) {
-    const index = tabsList.value.findIndex(item => item.key === location.pathname)
-    if (index === -1) {
+    const findIndex = tabsList.value.findIndex(item => item.key === route.path)
+    if (findIndex === -1) {
       addTabs({
         key: route.path,
-        label: route.meta.title as string || Math.random().toFixed(5),
+        label: route.meta.title as string,
         closable: route.path !== PageEnum.ROOT_INDEX,
       })
     }

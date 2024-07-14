@@ -15,7 +15,7 @@ const route = useRoute()
 const activeMenu = ref('')
 
 watch(
-  () => route.name,
+  () => route.path,
   () => {
     activeMenu.value = route.meta.activeMenu || route.path
   },
