@@ -10,6 +10,5 @@ export default antfu({
   rules: {
     'no-console': 'off',
     'no-debugger': 'off',
-    'style/no-tabs': 'off',
   },
 })

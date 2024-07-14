@@ -56,7 +56,7 @@ const tabList = [
 <template>
   <Teleport to="body">
     <div
-      class="box-border	fixed right-[0px] top-[50%] -translate-y-[50%] p-[10px] bg-[var(--el-color-primary-light-3)] rounded-l-xl"
+      class="box-border fixed right-[0px] top-[50%] -translate-y-[50%] p-[10px] bg-[var(--el-color-primary-light-3)] rounded-l-xl"
     >
       <div
         class="hover:animate-spin flex icon-[bi--gear-fill]  h-[25px] w-[25px] cursor-pointer bg-white"
