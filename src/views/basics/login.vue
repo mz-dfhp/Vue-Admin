@@ -5,7 +5,7 @@ import { ElMessage, type FormInstance } from 'element-plus'
 import { useUserStore } from '@/store/user'
 import LoginSvg from '@/assets/login-bg.svg'
 
-const { setToken, setUserInfo } = useUserStore()
+const { setToken } = useUserStore()
 const UserIcon = h('div', {
   className: 'icon-[bi--person]',
   style: {
@@ -39,10 +39,6 @@ async function submitForm() {
       }
       loading.value = true
       setToken(loginForm.username)
-      setUserInfo({
-        username: 'admin',
-        avatar: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      })
       loading.value = false
       router.replace({
         path: '/',
