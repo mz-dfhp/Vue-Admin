@@ -28,7 +28,7 @@ watch(
 <template>
   <div class="h-full">
     <div class="h-full flex flex-col">
-      <div v-if="false" class="h-[64px] w-full flex items-center justify-center">
+      <div class="h-[64px] w-full flex items-center justify-center">
         <img
           :src="Logo"
           class="logo mx-[10px] h-[32px] animate-bounce"
