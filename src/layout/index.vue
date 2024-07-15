@@ -20,7 +20,7 @@ const { collapsed } = storeToRefs(useSettingStore())
         <AppHeader />
         <AppTabs />
       </el-header>
-      <el-main class="bg-[#f5f5f5]">
+      <el-main class="bg-[#f5f5f5] dark:bg-[#000000]">
         <AppMain />
       </el-main>
     </el-container>

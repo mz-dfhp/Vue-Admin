@@ -1,0 +1,11 @@
+:root {
+  --main-bg: #f5f5f5;
+  --tabs-hover: #cacaca;
+
+  &.dark {
+    --main-bg: #2a2a2e;
+    --tabs-hover: #3a3535;
+  }
+}
+$mainBgColor: var(--main-bg);
+$tabsHover: var(--tabs-hover);

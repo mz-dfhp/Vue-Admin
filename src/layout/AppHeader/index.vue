@@ -33,9 +33,9 @@ function loginOut() {
       @click="setCollapsed(!collapsed)"
     />
     <div class="ml-auto flex items-center justify-around px-[25px]">
-      <div
+      <!-- <div
         class="icon-[bi--arrow-left-right] ml-[20px] cursor-pointer transition-all hover:scale-[1.2]"
-      />
+      /> -->
       <div
         class="icon-[bi--github] ml-[20px] cursor-pointer transition-all hover:scale-[1.2]"
         @click="goGithub"

@@ -110,31 +110,18 @@ watch(() => route.path, () => {
 <template>
   <div class="flex items-center overflow-hidden px-[5px]">
     <div class="flex-1 overflow-hidden">
-      <el-tabs
-        v-model="activeKey"
-        type="card"
-        :class="tabName"
-        @tab-remove="onTabRemove"
-        @tab-click="onTabClick"
-      >
+      <el-tabs v-model="activeKey" type="card" :class="tabName" @tab-remove="onTabRemove" @tab-click="onTabClick">
         <el-tab-pane
-          v-for="item in tabsList"
-          :key="item.key"
-          :label="item.label"
-          :name="item.key"
+          v-for="item in tabsList" :key="item.key" :label="item.label" :name="item.key"
           :closable="item.closable"
         />
       </el-tabs>
     </div>
     <el-dropdown @command="handleCommand">
-      <div
-        class="icon-[bi--grid-fill] ml-auto w-[50px] flex-shrink-0 cursor-pointer text-[16px]"
-      />
+      <div class="icon-[bi--grid-fill] ml-auto w-[50px] flex-shrink-0 cursor-pointer text-[16px]" />
       <template #dropdown>
         <el-dropdown-item
-          v-for="(item, index) in operateList"
-          :key="index"
-          :disabled="operateDisabled(item.id)"
+          v-for="(item, index) in operateList" :key="index" :disabled="operateDisabled(item.id)"
           :command="item.id"
         >
           <div className="flex items-center">
@@ -151,23 +138,30 @@ watch(() => route.path, () => {
 :deep(.el-scrollbar__wrap) {
   overflow: hidden;
 }
+
 :deep(.el-tabs) {
   .el-tabs__header {
     margin: 0;
     border-bottom: none;
+
     .el-tabs__nav-scroll {
-      padding: 0 25px;
+      padding: 0;
+
       .el-tabs__nav {
         border: none !important;
       }
     }
   }
 }
+
 // 卡片
 :deep(.card) {
-  .el-tabs__nav-scroll {
-    padding: 0 25px;
+  .el-tabs__header {
+    .el-tabs__nav-scroll {
+      padding: 0 25px;
+    }
   }
+
   .el-tabs__item {
     min-width: 100px;
     margin-left: -10px;
@@ -177,7 +171,7 @@ watch(() => route.path, () => {
     &:hover {
       z-index: 2;
       position: relative;
-      background: #cacaca;
+      background: $tabsHover;
       border-radius: 8px 8px 0 0;
 
       &::before {
@@ -190,7 +184,7 @@ watch(() => route.path, () => {
         background: radial-gradient(
           circle at 0 0,
           transparent 20px,
-          #cacaca 21px
+          $tabsHover 21px
         );
       }
 
@@ -204,7 +198,7 @@ watch(() => route.path, () => {
         background: radial-gradient(
           circle at 100% 0,
           transparent 20px,
-          #cacaca 21px
+          $tabsHover 21px
         );
       }
     }
@@ -213,7 +207,7 @@ watch(() => route.path, () => {
   .el-tabs__item.is-active {
     z-index: 1;
     position: relative;
-    background: #f5f5f5;
+    background: $mainBgColor;
     border-radius: 8px 8px 0 0;
 
     &::before {
@@ -226,7 +220,7 @@ watch(() => route.path, () => {
       background: radial-gradient(
         circle at 0 0,
         transparent 20px,
-        #f5f5f5 21px
+        $mainBgColor 21px
       );
     }
 
@@ -240,7 +234,7 @@ watch(() => route.path, () => {
       background: radial-gradient(
         circle at 100% 0,
         transparent 20px,
-        #f5f5f5 21px
+        $mainBgColor 21px
       );
     }
   }
@@ -289,6 +283,7 @@ watch(() => route.path, () => {
       }
     }
   }
+
   .el-tabs__item.is-active {
     position: relative;
     background: var(--el-color-primary-light-9);
