@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
 import { useFullscreen } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
 import { useRefresh } from '@/hooks/useRefresh'
 
+const route = useRoute()
 const { refresh } = useRefresh()
 const settingStore = useSettingStore()
 const { isDark, collapsed } = storeToRefs(settingStore)
@@ -32,6 +34,14 @@ function loginOut() {
       :class="collapsed ? 'icon-[bi--text-indent-left]' : 'icon-[bi--text-indent-right]'"
       @click="setCollapsed(!collapsed)"
     />
+    <el-breadcrumb separator="/" class="ml-[20px] overflow-hidden w-0 lg:w-auto">
+      <el-breadcrumb-item
+        v-for="item in route.meta.breadcrumb"
+        :key="item.name"
+      >
+        {{ item.title }}
+      </el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="ml-auto flex items-center justify-around px-[25px]">
       <!-- <div
         class="icon-[bi--arrow-left-right] ml-[20px] cursor-pointer transition-all hover:scale-[1.2]"

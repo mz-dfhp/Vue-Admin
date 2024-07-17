@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router'
+import type { RouteMeta, RouteRecordRaw } from 'vue-router'
 import type { IPermission } from '@/interface'
 
 /**
@@ -6,15 +6,21 @@ import type { IPermission } from '@/interface'
  * @param systemRoutes
  * @returns 扁平化路由
  */
-export function flatSystemRoutes(systemRoutes: RouteRecordRaw[], url = '') {
+export function flatSystemRoutes(systemRoutes: RouteRecordRaw[], url = '', breadcrumb: RouteMeta['breadcrumb'] = []) {
   const result: RouteRecordRaw[] = []
   systemRoutes.forEach((item) => {
     const path = `${url || ''}/${item.path}`.replace('//', '/')
+    const currentCrumb = {
+      title: item.meta?.title || '',
+      path,
+      hide: item.meta?.hide || false,
+    }
+    const crumbs = [...breadcrumb, currentCrumb]
     result.push({
       ...item,
       path,
-      meta: item.meta,
-      children: item.children ? flatSystemRoutes(item.children, path) : [],
+      meta: Object.assign(item.meta as RouteMeta, { breadcrumb: crumbs }),
+      children: item.children ? flatSystemRoutes(item.children, path, crumbs) : [],
     })
   })
   return result

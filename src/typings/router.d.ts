@@ -1,4 +1,8 @@
-import type { TBreadcrumb } from '@/interface'
+import type { RouteMeta, RouteRecordRaw } from 'vue-router'
+
+export interface TBreadcrumb extends
+  Omit<RouteMeta, 'title' | 'hide'>,
+  Omit<RouteRecordRaw, 'path'> { }
 
 interface CustomRouteMeta {
   title: string
@@ -7,7 +11,7 @@ interface CustomRouteMeta {
   activeMenu?: string
   hide?: boolean
   sort?: number
-  breadcrumb?: TBreadcrumb
+  breadcrumb?: TBreadcrumb[]
 }
 
 declare module 'vue-router' {
