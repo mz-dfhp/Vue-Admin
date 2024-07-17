@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+</script>
 
 <template>
   <div
@@ -8,7 +12,7 @@
     <div class="animate-bounce text-[30px]">
       404
     </div>
-    <el-button type="primary" @click="$router.push('/')">
+    <el-button type="primary" @click="router.push('/')">
       去首页
     </el-button>
   </div>
