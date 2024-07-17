@@ -1,8 +1,8 @@
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
 
 export interface TBreadcrumb extends
-  Omit<RouteMeta, 'title' | 'hide'>,
-  Omit<RouteRecordRaw, 'path'> { }
+  Pick<RouteMeta, 'title' | 'hide'>,
+  Pick<RouteRecordRaw, 'path'> { }
 
 interface CustomRouteMeta {
   title: string
