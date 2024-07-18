@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import { defineStore } from 'pinia'
 import store from '@/store'
@@ -22,14 +22,40 @@ export const useSettingStore = defineStore(
     function setCollapsed(data: boolean) {
       collapsed.value = data
     }
-    const tabName = ref<TabName>('card')
+    const tabName = ref<TabName>('etherealize')
     function setTabName(data: TabName) {
       tabName.value = data
     }
-    const themeColor = ref('')
+    const themeColor = ref('rgb(22, 119, 255)')
     function setThemeColor(data: string) {
       themeColor.value = data
+      const el: HTMLElement = document.documentElement
+      const colors: Record<string, number> = {
+        '--el-color-primary': 1,
+        '--el-color-primary-light-3': 0.7,
+        '--el-color-primary-light-5': 0.5,
+        '--el-color-primary-light-7': 0.3,
+        '--el-color-primary-light-8': 0.2,
+        '--el-color-primary-light-9': 0.1,
+        '--el-color-primary-dark-2': 1,
+      }
+      Object.keys(colors).forEach((item: string) => {
+        el.style.setProperty(
+          item,
+          `${data.replace(')', '')},${colors[item]})`,
+        )
+      })
+      el.style.setProperty('--el-text-color-secondary', data)
+      themeColor.value = data
     }
+    watch(themeColor, (value) => {
+      if (value) {
+        setThemeColor(value)
+      }
+    }, {
+      immediate: true,
+    })
+
     return {
       isDark,
       toggleDark,

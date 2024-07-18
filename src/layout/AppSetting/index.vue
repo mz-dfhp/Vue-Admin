@@ -20,6 +20,7 @@ const predefineColors = [
   '#90ee90',
   '#00ced1',
   '#1e90ff',
+  '#1677ff',
   '#c71585',
   '#0e0c95',
 ]

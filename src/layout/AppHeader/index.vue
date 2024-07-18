@@ -30,7 +30,7 @@ function loginOut() {
 <template>
   <div class="h-[60px] flex items-center justify-between px-[20px]">
     <div
-      class="cursor-pointer  text-[18px]"
+      class="cursor-pointer  text-[18px] flex-shrink-0"
       :class="collapsed ? 'icon-[bi--text-indent-left]' : 'icon-[bi--text-indent-right]'"
       @click="setCollapsed(!collapsed)"
     />

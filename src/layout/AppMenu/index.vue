@@ -53,5 +53,16 @@ watch(
 <style scoped lang="scss">
 :deep(.el-menu) {
   border-right: none;
+  .el-sub-menu__title {
+    margin: 0 4px;
+    border-radius: 6px;
+  }
+  .el-menu-item {
+    margin: 4px;
+    border-radius: 6px;
+    &.is-active {
+      background-color: var(--el-menu-hover-bg-color);
+    }
+  }
 }
 </style>
