@@ -37,7 +37,7 @@ function loginOut() {
     <el-breadcrumb separator="/" class="ml-[20px] overflow-hidden w-0 lg:w-auto">
       <el-breadcrumb-item
         v-for="item in route.meta.breadcrumb"
-        :key="item.name"
+        :key="item.path"
       >
         {{ item.title }}
       </el-breadcrumb-item>
