@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
 import { useRefresh } from '@/hooks/useRefresh'
+import { loginOut } from '@/api'
 
 const route = useRoute()
 const { refresh } = useRefresh()
@@ -19,11 +20,6 @@ const { isFullscreen, toggle } = useFullscreen()
 
 function goGithub() {
   window.open('https://github.com/mz-dfhp/Vue-Admin')
-}
-
-function loginOut() {
-  window.localStorage.clear()
-  window.location.reload()
 }
 </script>
 
